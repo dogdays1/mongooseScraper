@@ -19,7 +19,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 // Connect to the Mongo DB
-mongoose.connect("mongodb://localhost/bbcscraper");
+//mongoose.connect("mongodb://localhost/bbcscraper");
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/bbcscraper";
+mongoose.Promise = Promise;
+mongoose.connect(MONGODB_URI);
 
 // Routes
 // First, tell the console what server2.js is doing
