@@ -33,20 +33,21 @@ $.getJSON("/articles", function(data) {
         // If there's a note(s) already in the article
         if (data.note) {
           console.log("data note" + data.note)
+          console.log(data.note[0].title)
           //put this code in a for loop data.note.length
-          //for (var i=0; i<data.note.length; i++) {  LOOP NOT WORKING???!
-          var newDiv = $("<div></div>")
-          var newH3 =$("<h3></h3>")
-          var newP =$("<p></p>")
-          newH3.val(data.note.title)
-          newP.val(data.note.body)
+          for (var i=0; i<data.note.length; i++){
+          var newDiv = $("<div>")
+          var newH3 =$("<h3>")
+          var newP =$("<p>")
+          newH3.text(data.note[i].title)
+          newP.text(data.note[i].body)
          newDiv.append(newH3).append(newP).append("<button data-id='" + data._id + "' id='deletenote'>Delete Note</button>")
           console.log(newDiv)
           $("#existingNotes").append(newDiv)
          // $("#notes").append(newH3)
           //$("#notes").append(newP)
 
-         // }
+         }
           // Place the title of the note in the title input
          // $("#titleinput").val(data.note.title);
           // Place the body of the note in the body textarea
