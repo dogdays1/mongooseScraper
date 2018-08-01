@@ -28,11 +28,12 @@ $.getJSON("/articles", function(data) {
         $("#notes").append("<h2>" + data.title + "</h2>");
         $("#notes").append("<input id='titleinput' name='title' >");
         $("#notes").append("<textarea id='bodyinput' name='body'></textarea>");
-        $("#notes").append("<button data-id='" + data._id + "' id='savenote'>Save Note</button>");
+        $("#notes").append("<button data-id='" + data._id + "' class='savenote'>Save Note</button>");
+        $(".existingNotes").empty()
   
         // If there's a note(s) already in the article
         if (data.note) {
-          console.log("data note" + data.note)
+          console.log(data.note)
           console.log(data.note[0].title)
           //put this code in a for loop data.note.length
           for (var i=0; i<data.note.length; i++){
@@ -41,9 +42,9 @@ $.getJSON("/articles", function(data) {
           var newP =$("<p>")
           newH3.text(data.note[i].title)
           newP.text(data.note[i].body)
-         newDiv.append(newH3).append(newP).append("<button data-id='" + data._id + "' id='deletenote'>Delete Note</button>")
+         newDiv.append(newH3).append(newP).append("<button data-id='" + data._id + "' class='deletenote'>Delete Note</button>")
           console.log(newDiv)
-          $("#existingNotes").append(newDiv)
+          $(".existingNotes").append(newDiv)
          // $("#notes").append(newH3)
           //$("#notes").append(newP)
 
@@ -56,7 +57,7 @@ $.getJSON("/articles", function(data) {
       });
   });
   
-  $(document).on("click", "#savenote", function() {
+  $(document).on("click", ".savenote", function() {
     var thisId = $(this).attr("data-id");
   
     $.ajax({
@@ -77,7 +78,7 @@ $.getJSON("/articles", function(data) {
     $("#bodyinput").val("");
   });
 
-  $(document).on("click", "#deletenote", function() {
+  $(document).on("click", ".deletenote", function() {
     var thisId = $(this).attr("data-id");
   
     $.ajax({
